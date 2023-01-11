@@ -3,7 +3,7 @@ import 'package:admin_dashboard/common/state.dart';
 import 'package:admin_dashboard/interface/login_admin_page.dart';
 import 'package:admin_dashboard/provider/auth_admin_provider.dart';
 import 'package:admin_dashboard/provider/membership_provider.dart';
-import 'package:admin_dashboard/responsive/membership_detail.dart';
+import 'package:admin_dashboard/interface/membership_detail.dart';
 import 'package:admin_dashboard/widget/error_mesage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

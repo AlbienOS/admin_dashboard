@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/interface/firebase_storage_page.dart';
 import 'package:admin_dashboard/interface/login_admin_page.dart';
 import 'package:admin_dashboard/interface/unactive_member_page.dart';
 import 'package:admin_dashboard/model/member_model.dart';
@@ -5,7 +6,7 @@ import 'package:admin_dashboard/model/membership_model.dart';
 import 'package:admin_dashboard/provider/auth_admin_provider.dart';
 import 'package:admin_dashboard/provider/member_provider.dart';
 import 'package:admin_dashboard/provider/unactive_member_provider.dart';
-import 'package:admin_dashboard/responsive/membership_detail.dart';
+import 'package:admin_dashboard/interface/membership_detail.dart';
 import 'package:admin_dashboard/responsive/dekstop_scaffold.dart';
 import 'package:admin_dashboard/responsive/mobile_scaffold.dart';
 import 'package:admin_dashboard/responsive/responsive_layout.dart';
@@ -63,11 +64,12 @@ class MyApp extends StatelessWidget {
             tabletBody: TabletScaffold(),
             dekstopBody: DesktopScaffold(),
         ),
-        MobileScaffold.routeName: (context) => MobileScaffold(),
-        TabletScaffold.routeName : (context) => TabletScaffold(),
-        DesktopScaffold.routeName: (context) => DesktopScaffold(),
-        MembershipDekstop.routeName: (context) => MembershipDekstop(membershipId: ModalRoute.of(context)!.settings.arguments as String),
-        UnactiveMemberPage.routeName: (context) => UnactiveMemberPage(),
+        MobileScaffold.routeName: (context) => const MobileScaffold(),
+        TabletScaffold.routeName : (context) => const TabletScaffold(),
+        DesktopScaffold.routeName: (context) => const DesktopScaffold(),
+        MembershipDekstop.routeName: (context) =>  MembershipDekstop(membershipId: ModalRoute.of(context)!.settings.arguments as String),
+        UnactiveMemberPage.routeName: (context) => const UnactiveMemberPage(),
+        FirebaseStoragePage.routeName: (context) => const FirebaseStoragePage(),
       },
     );
   }

@@ -7,7 +7,7 @@ import 'package:admin_dashboard/provider/member_provider.dart';
 import 'package:admin_dashboard/provider/membership_provider.dart';
 import 'package:admin_dashboard/provider/sort_by_name_provider.dart';
 import 'package:admin_dashboard/provider/sort_data_by_date_provider.dart';
-import 'package:admin_dashboard/responsive/membership_detail.dart';
+import 'package:admin_dashboard/interface/membership_detail.dart';
 import 'package:admin_dashboard/responsive/responsive_layout.dart';
 import 'package:admin_dashboard/widget/headline_widget.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,7 @@
 import 'package:admin_dashboard/api/auth_admin_api.dart';
 import 'package:admin_dashboard/common/state.dart';
 import 'package:admin_dashboard/constant.dart';
+import 'package:admin_dashboard/interface/firebase_storage_page.dart';
 import 'package:admin_dashboard/interface/login_admin_page.dart';
 import 'package:admin_dashboard/interface/unactive_member_page.dart';
 import 'package:admin_dashboard/provider/auth_admin_provider.dart';
@@ -9,7 +10,7 @@ import 'package:admin_dashboard/widget/error_mesage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../responsive/membership_detail.dart';
+import '../interface/membership_detail.dart';
 
 class Navigation extends StatelessWidget{
   static const routeName = "/Navigation";
@@ -70,6 +71,18 @@ class Navigation extends StatelessWidget{
                 ),
                 onTap: (){
                   Navigator.pushReplacementNamed(context, UnactiveMemberPage.routeName);
+                },
+              ),
+            ),
+            Padding(
+              padding: tilePadding,
+              child: ListTile(
+                leading: Icon(Icons.image_sharp),
+                title: Text('S T O R A G E',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                onTap: (){
+                  Navigator.pushReplacementNamed(context, FirebaseStoragePage.routeName);
                 },
               ),
             ),

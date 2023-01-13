@@ -145,9 +145,7 @@ class TotalDataRecap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TotalUserDataProvider(),
-      child: Consumer<TotalUserDataProvider>(
+    return  Consumer<TotalUserDataProvider>(
         builder: (context, snapshot, _) {
           var currentState = snapshot.state;
           if (currentState == CurrentState.isLoading) {
@@ -218,7 +216,6 @@ class TotalDataRecap extends StatelessWidget {
             );
           }
         },
-      ),
-    );
+      );
   }
 }

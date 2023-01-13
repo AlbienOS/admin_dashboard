@@ -1,8 +1,10 @@
 import 'package:admin_dashboard/common/state.dart';
 import 'package:admin_dashboard/constant.dart';
 import 'package:admin_dashboard/helper/navigation.dart';
+import 'package:admin_dashboard/interface/data_recap_storage_page.dart';
 import 'package:admin_dashboard/interface/image_page.dart';
 import 'package:admin_dashboard/provider/firebase_storage_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +37,6 @@ class FirebaseStoragePage extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   } else if (currentState == CurrentState.hasData) {
                     return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                             child: ListView.builder(
@@ -44,35 +45,33 @@ class FirebaseStoragePage extends StatelessWidget {
                                   return InkWell(
                                     onTap: () {
                                       Navigator.of(context).push(
-                                          MaterialPageRoute(builder:
-                                              (context)=> ImagePage(
+                                          MaterialPageRoute(
+                                              builder: (context) => ImagePage(
                                                   file: storageData[i])));
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Card(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                         ),
-                                        child: Row(
+                                        child: Column(
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(16.0),
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
                                                   child: Image.network(
                                                     storageData[i].url,
                                                     width: 100,
                                                     height: 100,
                                                   ),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
+                                                ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
                                                     horizontal: 8.0,
                                                     vertical: 8.0,
                                                   ),
@@ -88,8 +87,6 @@ class FirebaseStoragePage extends StatelessWidget {
                                               ],
                                             ),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
@@ -135,7 +132,34 @@ class FirebaseStoragePage extends StatelessWidget {
                                                                   TextButton(
                                                                     onPressed:
                                                                         () async {
-
+                                                                      try {
+                                                                        final delete =
+                                                                            await Provider.of<FirebaseStorageProvider>(context, listen: false).deleteDataStorage(storageData[i].name);
+                                                                        if (delete ==
+                                                                            "success") {
+                                                                          const SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              "Hapus Berhasil",
+                                                                            ),
+                                                                          );
+                                                                          Navigator.pushReplacementNamed(
+                                                                              context,
+                                                                              FirebaseStoragePage.routeName);
+                                                                        }
+                                                                      } catch (e) {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          const SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              "Maaf terjadi kesalahan",
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                        print(
+                                                                            e);
+                                                                      }
                                                                     },
                                                                     child: Text(
                                                                       "HAPUS",
@@ -149,7 +173,7 @@ class FirebaseStoragePage extends StatelessWidget {
                                                   ),
                                                 ),
                                               ],
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -192,16 +216,7 @@ class FirebaseStoragePage extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 400,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ),
+                  DataRecapeStorage(),
                   // list of stuff
                   Expanded(
                     child: Padding(
